@@ -65,6 +65,9 @@ RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/NSFW-22-L-e8.safetensors
 RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/WAN-2.2-I2V-HandjobBlowjobCombo-HIGH-v1.safetensors -O /ComfyUI/models/loras/WAN-2.2-I2V-HandjobBlowjobCombo-HIGH-v1.safetensors
 RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/WAN-2.2-I2V-HandjobBlowjobCombo-LOW-v1.safetensors -O /ComfyUI/models/loras/WAN-2.2-I2V-HandjobBlowjobCombo-LOW-v1.safetensors
 
+RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/DR34ML4Y_I2V_14B_HIGH.safetensors -O /ComfyUI/models/loras/DR34ML4Y_I2V_14B_HIGH.safetensors
+RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/DR34ML4Y_I2V_14B_LOW.safetensors -O /ComfyUI/models/loras/DR34ML4Y_I2V_14B_LOW.safetensors
+
 
 RUN wget -q https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors -O /ComfyUI/models/clip_vision/clip_vision_h.safetensors
 RUN wget -q https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/umt5-xxl-enc-bf16.safetensors -O /ComfyUI/models/text_encoders/umt5-xxl-enc-bf16.safetensors

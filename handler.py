@@ -147,7 +147,17 @@ def load_workflow(workflow_path):
 def handler(job):
     job_input = job.get("input", {})
 
-    logger.info(f"Received job input: {job_input}")
+    # Create sanitized copy for logging (avoid logging large base64 strings)
+    job_input_log = job_input.copy()
+    if "image_base64" in job_input_log and job_input_log["image_base64"]:
+        job_input_log["image_base64"] = f"[BASE64_TRUNCATED_{len(job_input_log['image_base64'])}chars]"
+    if "end_image_base64" in job_input_log and job_input_log["end_image_base64"]:
+        job_input_log["end_image_base64"] = f"[BASE64_TRUNCATED_{len(job_input_log['end_image_base64'])}chars]"
+
+    logger.info(f"Received job input: {job_input_log}")
+
+    # logger.info(f"Received job input: {job_input}")  # Original logging (commented to avoid base64 spam)
+    
     task_id = f"task_{uuid.uuid4()}"
 
     # 이미지 입력 처리 (image_path, image_url, image_base64 중 하나만 사용)
