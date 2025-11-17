@@ -153,6 +153,11 @@ def load_workflow(workflow_path):
         return json.load(file)
 
 def handler(job):
+    # Log separator at start of each job
+    logger.info("=" * 80)
+    logger.info("NEW JOB STARTED")
+    logger.info("=" * 80)
+
     job_input = job.get("input", {})
 
     # Create sanitized copy for logging (avoid logging large base64 strings)
@@ -309,6 +314,11 @@ def handler(job):
             time.sleep(5)
     videos = get_videos(ws, prompt)
     ws.close()
+
+    # Log separator between jobs for better log readability
+    logger.info("=" * 80)
+    logger.info("JOB PROCESSING COMPLETE - STARTING CLEANUP")
+    logger.info("=" * 80)
 
     # Clean up temporary directories after processing
     for temp_dir in temp_dirs_created:
