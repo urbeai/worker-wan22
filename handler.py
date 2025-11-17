@@ -1,6 +1,7 @@
 import runpod
 from runpod.serverless.utils import rp_upload
 import os
+import shutil
 import websocket
 import base64
 import json
@@ -136,6 +137,13 @@ def get_videos(ws, prompt):
                 with open(video['fullpath'], 'rb') as f:
                     video_data = base64.b64encode(f.read()).decode('utf-8')
                 videos_output.append(video_data)
+
+                # Clean up: delete the video file after processing
+                try:
+                    os.remove(video['fullpath'])
+                    logger.info(f"Cleaned up video file: {video['fullpath']}")
+                except OSError as e:
+                    logger.warning(f"Failed to delete video file {video['fullpath']}: {e}")
         output_videos[node_id] = videos_output
 
     return output_videos
@@ -159,14 +167,17 @@ def handler(job):
     # logger.info(f"Received job input: {job_input}")  # Original logging (commented to avoid base64 spam)
     
     task_id = f"task_{uuid.uuid4()}"
+    temp_dirs_created = set()  # Track temp directories for cleanup
 
     # Process image input (use only one of image_path, image_url, image_base64)
     image_path = None
     if "image_path" in job_input:
         image_path = process_input(job_input["image_path"], task_id, "input_image.jpg", "path")
     elif "image_url" in job_input:
+        temp_dirs_created.add(task_id)  # Track for cleanup
         image_path = process_input(job_input["image_url"], task_id, "input_image.jpg", "url")
     elif "image_base64" in job_input:
+        temp_dirs_created.add(task_id)  # Track for cleanup
         image_path = process_input(job_input["image_base64"], task_id, "input_image.jpg", "base64")
     else:
         # Use default value
@@ -178,8 +189,10 @@ def handler(job):
     if "end_image_path" in job_input:
         end_image_path_local = process_input(job_input["end_image_path"], task_id, "end_image.jpg", "path")
     elif "end_image_url" in job_input:
+        temp_dirs_created.add(task_id)  # Track for cleanup
         end_image_path_local = process_input(job_input["end_image_url"], task_id, "end_image.jpg", "url")
     elif "end_image_base64" in job_input:
+        temp_dirs_created.add(task_id)  # Track for cleanup
         end_image_path_local = process_input(job_input["end_image_base64"], task_id, "end_image.jpg", "base64")
     
     # Check LoRA configuration - receive as array and process
@@ -297,11 +310,19 @@ def handler(job):
     videos = get_videos(ws, prompt)
     ws.close()
 
+    # Clean up temporary directories after processing
+    for temp_dir in temp_dirs_created:
+        try:
+            shutil.rmtree(temp_dir)
+            logger.info(f"Cleaned up temporary directory: {temp_dir}")
+        except Exception as e:
+            logger.warning(f"Failed to clean up temp directory {temp_dir}: {e}")
+
     # Handle case where no images are found
     for node_id in videos:
         if videos[node_id]:
             return {"video": videos[node_id][0]}
-    
+
     return {"error": "Video not found."}
 
 runpod.serverless.start({"handler": handler})
