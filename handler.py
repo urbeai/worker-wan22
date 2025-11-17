@@ -318,6 +318,27 @@ def handler(job):
         except Exception as e:
             logger.warning(f"Failed to clean up temp directory {temp_dir}: {e}")
 
+    # Clean up ComfyUI output directory (removes PNGs, intermediate files, etc.)
+    output_dir = "/ComfyUI/output"
+    try:
+        if os.path.exists(output_dir):
+            # Remove all files and subdirectories in output directory
+            for filename in os.listdir(output_dir):
+                file_path = os.path.join(output_dir, filename)
+                try:
+                    if os.path.isfile(file_path) or os.path.islink(file_path):
+                        os.unlink(file_path)
+                        logger.info(f"Removed file: {file_path}")
+                    elif os.path.isdir(file_path):
+                        shutil.rmtree(file_path)
+                        logger.info(f"Removed directory: {file_path}")
+                except Exception as e:
+                    logger.warning(f"Failed to remove {file_path}: {e}")
+        else:
+            logger.info("ComfyUI output directory does not exist")
+    except Exception as e:
+        logger.warning(f"Failed to clean ComfyUI output directory: {e}")
+
     # Handle case where no images are found
     for node_id in videos:
         if videos[node_id]:
