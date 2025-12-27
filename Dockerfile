@@ -69,6 +69,11 @@ RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/WAN-2.2-I2V-HandjobBlowj
 RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/DR34ML4Y_I2V_14B_HIGH.safetensors -O /ComfyUI/models/loras/DR34ML4Y_I2V_14B_HIGH.safetensors
 RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/DR34ML4Y_I2V_14B_LOW.safetensors -O /ComfyUI/models/loras/DR34ML4Y_I2V_14B_LOW.safetensors
 
+RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/wan22-f4c3spl4sh-100epoc-high-k3nk.safetensors -O /ComfyUI/models/loras/wan22-f4c3spl4sh-100epoc-high-k3nk.safetensors
+RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/wan22-f4c3spl4sh-154epoc-low-k3nk.safetensors -O /ComfyUI/models/loras/wan22-f4c3spl4sh-154epoc-low-k3nk.safetensors
+
+RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/wan22-ultimatedeepthroat-i2v-102epoc-high-k3nk.safetensors -O /ComfyUI/models/loras/wan22-ultimatedeepthroat-i2v-102epoc-high-k3nk.safetensors
+RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/wan22-ultimatedeepthroat-I2V-101epoc-low-k3nk.safetensors -O /ComfyUI/models/loras/wan22-ultimatedeepthroat-I2V-101epoc-low-k3nk.safetensors
 
 RUN wget -q https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors -O /ComfyUI/models/clip_vision/clip_vision_h.safetensors
 RUN wget -q https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/umt5-xxl-enc-bf16.safetensors -O /ComfyUI/models/text_encoders/umt5-xxl-enc-bf16.safetensors
