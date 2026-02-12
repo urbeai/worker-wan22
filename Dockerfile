@@ -93,5 +93,4 @@ RUN wget -q https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Wan2_1_VAE_
 COPY . .
 COPY extra_model_paths.yaml /ComfyUI/extra_model_paths.yaml
 RUN chmod +x /entrypoint.sh
-
 CMD ["/entrypoint.sh"]
