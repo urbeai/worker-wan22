@@ -81,6 +81,9 @@ RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/jfj-deepthroat-W22-I2V-L
 RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/PussyLoRA_HighNoise_Wan2.2_HearmemanAI.safetensors -O /ComfyUI/models/loras/PussyLoRA_HighNoise_Wan2.2_HearmemanAI.safetensors
 RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/PussyLoRA_LowNoise_Wan2.2_HearmemanAI.safetensors -O /ComfyUI/models/loras/PussyLoRA_LowNoise_Wan2.2_HearmemanAI.safetensors
 
+RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/PussyLoRA_HighNoise_Wan2.2_HearmemanAI.safetensors -O /ComfyUI/models/loras/I2V-WAN2.2-EdibleAnus-HighNoise-1.1_-000050.safetensors
+RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/PussyLoRA_LowNoise_Wan2.2_HearmemanAI.safetensors -O /ComfyUI/models/loras/I2V-WAN2.2-EdibleAnus-LowNoise-1.1_-000060.safetensors
+
 RUN wget -q https://www.urbedigital.com.mx/nobackup/wan/genitals_helper_v1.0_e219.safetensors -O /ComfyUI/models/loras/genitals_helper_v1.0_e219.safetensors
 
 RUN wget -q https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors -O /ComfyUI/models/clip_vision/clip_vision_h.safetensors
