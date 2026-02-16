@@ -1,6 +1,8 @@
 # Use specific version of nvidia cuda image
 # FROM wlsdml1114/my-comfy-models:v1 as model_provider
 #simon
+ARG CACHEBUST=1
+
 FROM wlsdml1114/multitalk-base:1.7 as runtime
 
 RUN pip install -U "huggingface_hub[hf_transfer]"
