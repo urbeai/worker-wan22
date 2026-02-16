@@ -1,9 +1,9 @@
 # Use specific version of nvidia cuda image
 # FROM wlsdml1114/my-comfy-models:v1 as model_provider
 #simon
-ARG CACHEBUST=1
 
-FROM wlsdml1114/multitalk-base:1.7 as runtime
+#FROM wlsdml1114/multitalk-base:1.7 as runtime
+FROM wlsdml1114/multitalk-base@sha256:f5c7ccc08f78e73e817419221fa96e6d2c4b33fb629bfa7a67999cf9c932d230 as runtime
 
 RUN pip install -U "huggingface_hub[hf_transfer]"
 RUN pip install runpod websocket-client
