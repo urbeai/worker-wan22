@@ -3,10 +3,14 @@
 #simon
 
 #FROM wlsdml1114/multitalk-base:1.7 as runtime
-FROM wlsdml1114/multitalk-base@sha256:f5c7ccc08f78e73e817419221fa96e6d2c4b33fb629bfa7a67999cf9c932d230 as runtime
+FROM wlsdml1114/multitalk-base@sha256:f5c7ccc08f78e73e817419221fa96e6d2c4b33fb629bfa7a67999cf9c932d230 AS runtime
 
+# Updated: 2026-02-15
 RUN pip install -U "huggingface_hub[hf_transfer]"
 RUN pip install runpod websocket-client
+
+ARG CACHEBUST=1
+RUN echo "Cache bust: $CACHEBUST"
 
 WORKDIR /
 
